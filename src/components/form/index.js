@@ -1,37 +1,44 @@
-import React from 'react';
-
+import { useState } from 'react';
 import './form.scss';
 
-class Form extends React.Component {
+function Form(props) {
 
-  handleSubmit = e => {
+  const [requestData, setRequestData] = useState({});
+  const [requestUrl, setRequestUrl] = useState('');
+
+  const handleSubmit = e => {
     e.preventDefault();
     const formData = {
-      method:'GET',
-      url: 'https://pokeapi.co/api/v2/pokemon',
+      url: requestUrl,
+      body: JSON.parse(requestData),
     };
-    this.props.handleApiCall(formData);
+    props.handleApiCall(formData);
   }
 
-  render() {
-    return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <label >
-            <span>URL: </span>
-            <input name='url' type='text' />
-            <button type="submit">GO!</button>
-          </label>
-          <label className="methods">
-            <span id="get">GET</span>
-            <span id="post">POST</span>
-            <span id="put">PUT</span>
-            <span id="delete">DELETE</span>
-          </label>
-        </form>
-      </>
-    );
+  const handleClick = (e) => {
+    let { value } = e.target;
+    props.setRequestParams({...props.requestParams, method: value});
   }
+
+  return (
+    <>
+      <form onSubmit={this.handleSubmit}>
+        <label >
+          <span>URL: </span>
+          <input onChange={(e) => setRequestUrl(e.target.value)} name='url' type='text' />
+          <button type="submit">GO!</button>
+        </label>
+        <label className="methods">
+          <button type='button' onClick={handleClick} id="get" value="GET">GET</button>
+          <button type='button' onClick={handleClick} id="post" value="POST">POST</button>
+          <button type='button' onClick={handleClick} id="put" value="PUT">PUT</button>
+          <button type='button' onClick={handleClick} id="delete" value="DELETE">DELETE</button>
+        </label>
+        <textarea onchange={(e) => setRequestData(e.target.value)} name='json' />
+      </form>
+    </>
+  );
+
 }
 
 export default Form;

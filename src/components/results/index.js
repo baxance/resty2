@@ -1,13 +1,16 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
 
-class Results extends React.Component {
-  render() {
+function Results(props) {
     return (
       <section>
-        <pre>{this.props.data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
+        <pre>
+          { props.data 
+            ? <ReactJson src={props.data} theme="summerfruit:inverted" /> 
+            : null}
+        </pre>
       </section>
     );
-  }
 }
 
 export default Results;
