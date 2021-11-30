@@ -10,7 +10,7 @@ function Form(props) {
     e.preventDefault();
     const formData = {
       url: requestUrl,
-      body: JSON.parse(requestData),
+      body: JSON.stringify(requestData),
     };
     props.handleApiCall(formData);
   }
@@ -22,7 +22,7 @@ function Form(props) {
 
   return (
     <>
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label >
           <span>URL: </span>
           <input onChange={(e) => setRequestUrl(e.target.value)} name='url' type='text' />
@@ -34,7 +34,7 @@ function Form(props) {
           <button type='button' onClick={handleClick} id="put" value="PUT">PUT</button>
           <button type='button' onClick={handleClick} id="delete" value="DELETE">DELETE</button>
         </label>
-        <textarea onchange={(e) => setRequestData(e.target.value)} name='json' />
+        <textarea onChange={(e) => setRequestData(e.target.value)} name='json' />
       </form>
     </>
   );
