@@ -10,7 +10,7 @@ function Form(props) {
     e.preventDefault();
     const formData = {
       url: requestUrl,
-      body: JSON.parse(requestData),
+      body: JSON.stringify(requestData),
     };
     props.handleApiCall(formData);
   }

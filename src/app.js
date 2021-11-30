@@ -9,14 +9,6 @@ import Results from './components/results';
 
 function App() {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     data: null,
-  //     requestParams: {},
-  //   };
-  // }
-
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams]= useState({});
 
@@ -31,7 +23,6 @@ function App() {
     };
     setData(data);
     setRequestParams({...requestParams, ...formParams});
-    // this.setState({data, requestParams});
   }
 
   
